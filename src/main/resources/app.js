@@ -1,4 +1,3 @@
-// Main JavaScript file to render the home page dynamically
 document.addEventListener("DOMContentLoaded", () => {
     // Get the root element
     const root = document.getElementById("root");
@@ -7,11 +6,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const header = document.createElement("header");
     header.className = "header";
     header.innerHTML = `
-        <h1>Welcome to CustomMyRide</h1>
+        <h1>CustomMyRide</h1>
         <nav>
             <ul class="nav-links">
-                <li><a href="#" id="home-link">Home</a></li>
-                <li><a href="#" id="services-link">Services</a></li>
+                <li><a href="#" id="ambien-lys-link">Ambien Lys</a></li>
+                <li><a href="#" id="rudetoning-link">Rudetoning</a></li>
                 <li><a href="#" id="cart-link">Cart</a></li>
                 <li><a href="#" id="about-link">About Us</a></li>
             </ul>
@@ -23,8 +22,8 @@ document.addEventListener("DOMContentLoaded", () => {
     main.className = "main-content";
     main.innerHTML = `
         <section>
-            <h2>Your Car, Your Style</h2>
-            <p>Welcome to CustomMyRide, where we help you style your car just the way you want it.</p>
+            <h2>Your Car, Our Passion</h2>
+            <p>CustomMyRide, where we help you style your car just the way you want it.</p>
             <button id="explore-services">Explore Services</button>
         </section>
     `;
@@ -33,6 +32,17 @@ document.addEventListener("DOMContentLoaded", () => {
     main.querySelector("#explore-services").addEventListener("click", () => {
         alert("Redirecting to Services page...");
         // Here you could implement navigation logic
+    });
+
+    // Add event listeners for service links
+    header.querySelector("#ambien-lys-link").addEventListener("click", () => {
+        alert("Viewing Ambient Lys details...");
+        // Implement navigation or load details here
+    });
+
+    header.querySelector("#rudetoning-link").addEventListener("click", () => {
+        alert("Viewing Rudetoning details...");
+        // Implement navigation or load details here
     });
 
     // Create footer
