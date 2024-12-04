@@ -1,3 +1,4 @@
+
 document.addEventListener("DOMContentLoaded", () => {
     // Get the root element
     const root = document.getElementById("root");
@@ -6,6 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const header = document.createElement("header");
     header.className = "header";
     header.innerHTML = `
+
         <h1>CustomMyRide</h1>
         <nav>
             <ul class="nav-links">
@@ -22,6 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
     main.className = "main-content";
     main.innerHTML = `
         <section>
+
             <h2>Your Car, Our Passion</h2>
             <p>CustomMyRide, where we help you style your car just the way you want it.</p>
             <button id="explore-services">Explore Services</button>
@@ -33,6 +36,7 @@ document.addEventListener("DOMContentLoaded", () => {
         alert("Redirecting to Services page...");
         // Here you could implement navigation logic
     });
+
 
     // Add event listeners for service links
     header.querySelector("#ambien-lys-link").addEventListener("click", () => {
