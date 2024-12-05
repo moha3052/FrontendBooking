@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+<style>
+    :root {
+        --primary-color: #3498db;
+        --secondary-color: #343a40;
+    rgb(52, 58, 64)
+    }
+    body {
+        font-family: 'Arial', sans-serif;
+    }
+    .navbar {
+        background-color: var(--secondary-color);
+    }
+</style>
+
+<!-- Navigation Bar -->
+<nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+    <div class="container">
+        <a class="navbar-brand d-flex align-items-center" href="#">
+            <img src="462575107_2409173296085156_3609403196024518581_n.png" alt="Custom My Ride Logo" style="height: 70px; border-radius: 10px;" class="me-2">
+            <span class="fs-4 fw-bold">CustomMyRide</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <!-- Dropdown Menu for Produkter -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#produkter" id="produkterDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Produkter
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="produkterDropdown">
+                        <li><a class="dropdown-item" href="#ambient-lighting">Ambient Lighting</a></li>
+                        <li><a class="dropdown-item" href="#chrome-delete">Chrome Delete</a></li>
+                        <li><a class="dropdown-item" href="#star-sky">Star Sky</a></li>
+                        <li><a class="dropdown-item" href="#steering-wheel">Steering Wheel</a></li>
+                        <li><a class="dropdown-item" href="#blackout">Blackout</a></li>
+                        <li><a class="dropdown-item" href="#kits">Kits</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item"><a class="nav-link" href="#om-os">Om os</a></li>
+                <li class="nav-item"><a class="nav-link" href="#kontakt">Kontakt</a></li>
+                <li class="nav-item">
+                    <a class="nav-link d-flex align-items-center" id="cart-icon" href="#">
+                        <i class="fa-solid fa-cart-shopping me-2" style="font-size: 24px;"></i>
+                        <span class="badge bg-danger" id="cart-count">0</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+<div class="container mt-5">
+    <!-- Visning af brugerens navn uden alert -->
+    <h4 class="text-center" id="loggedInUserName">Indlogget som: John Doe</h4> <!-- Dynamisk indhold -->
+
+    <h2 class="mt-4">Brugeres Oplysninger</h2>
+
+    <h4>Se Bookinger</h4>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">Navn</th>
+            <th scope="col">E-mail</th>
+            <th scope="col">Telefonnummer</th>
+            <th scope="col">By</th>
+            <th scope="col">Nummerplade</th>
+            <th scope="col">Status</th>
+            <th scope="col">Handlinger</th>
+        </tr>
+        </thead>
+        <tbody id="bookingTableBody">
+        <!-- Eksempel på data (dynamisk genereret fra backend) -->
+        <tr id="row-1">
+            <td>John Doe</td>
+            <td>john@example.com</td>
+            <td>12345678</td>
+            <td>København</td>
+            <td>AB12345</td>
+            <td>
+                <select id="status-1" onchange="updateStatus(1)">
+                    <option value="Igang" selected>Igang</option>
+                    <option value="Færdig">Færdig</option>
+                </select>
+            </td>
+            <td>
+                <button class="btn btn-danger btn-sm" onclick="deleteBooking(1)">Slet</button>
+            </td>
+        </tr>
+        <!-- Flere rækker kan tilføjes her -->
+        </tbody>
+    </table>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+
+
+
+</body>
+</html>
