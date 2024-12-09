@@ -1,4 +1,4 @@
-const method = {
+const methods = {
     GET: "GET",
     POST: "POST",
     PUT: "PUT",
@@ -10,21 +10,25 @@ const method = {
 class FetchesFunc {
     static #fetchBy(urlPath, methodType, path, data = null) {
         return (async () => {
-            if (!Object.values(method).includes(methodType)) {
+            if (!Object.values(methods).includes(methodType)) {
                 console.error(`Invalid HTTP method: ${methodType}`);
                 return null;
             }
 
             try {
-                const response = await fetch(`${urlPath}${path}`, {
+                const options = {
                     method: methodType,
-                    body: (methodType === method.GET || methodType === method.OPTION || data == null)
-                        ? null
-                        : JSON.stringify(data),
                     headers: {
                         "Content-Type": "application/json"
                     }
-                });
+                };
+
+                // If method is GET or OPTION, we do not send a body
+                if (methodType !== methods.GET && methodType !== methods.OPTION) {
+                    options.body = JSON.stringify(data);
+                }
+
+                const response = await fetch(`${urlPath}${path}`, options);
 
                 if (!response.ok) {
                     console.error(`HTTP Error: ${response.status} - ${response.statusText}`);
@@ -38,22 +42,24 @@ class FetchesFunc {
             }
         })(); // Immediately invoke the async function and return its result
     }
+
     static get(urlPath, path) {
-        return FetchesFunc.#fetchBy(urlPath, "GET", path);
+        return FetchesFunc.#fetchBy(urlPath, methods.GET, path);
     }
-    static get(urlPath, path,data) {
-        return FetchesFunc.#fetchBy(urlPath, "GET", path,data);
+
+    static getWithData(urlPath, path, data) { // Changed name to avoid conflict
+        return FetchesFunc.#fetchBy(urlPath, methods.GET, path, data);
     }
+
     static post(urlPath, path, data) {
-        return FetchesFunc.#fetchBy(urlPath, "POST", path, data);
+        return FetchesFunc.#fetchBy(urlPath, methods.POST, path, data);
     }
 
     static put(urlPath, path, data) {
-        return FetchesFunc.#fetchBy(urlPath, "PUT", path, data);
+        return FetchesFunc.#fetchBy(urlPath, methods.PUT, path, data);
     }
 
     static delete(urlPath, path, data) {
-        return FetchesFunc.#fetchBy(urlPath, "DELETE", path, data);
+        return FetchesFunc.#fetchBy(urlPath, methods.DELETE, path, data);
     }
-
 }

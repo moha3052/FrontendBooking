@@ -1,4 +1,4 @@
-const api = "http://localhost:8080/api/product/all/2";
+const api = "http://localhost:8080/api/product";
 let cartCount = 0; // Variabel til at holde styr på antal varer i kurven
 
 // Henter produkter fra API'et
@@ -25,7 +25,6 @@ function displayProducts(products) {
         productCard.className = "col-md-4"; // Bootstrap kolonne
         productCard.innerHTML = `
             <div class="card">
-                <img src="${product.imageURL}" alt="${product.name}" class="card-img-top" />
                 <div class="card-body">
                     <h5 class="card-title">${product.name}</h5>
                     <p class="card-text">${product.description}</p>
