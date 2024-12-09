@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CustomMyRide - Elevate Your Driving Experience</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #343a40;
+        rgb(52, 58, 64)
+        }
+        body {
+            font-family: 'Arial', sans-serif;
+        }
+        .navbar {
+            background-color: var(--secondary-color);
+        }
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/placeholder.svg?height=600&width=1200');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 100px 0;
+        }
+        .product-card {
+            transition: transform 0.3s ease;
+            height: 100%;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+        .about-section {
+            background-color: #f8f9fa;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navigation Bar -->
+<nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+    <div class="container">
+        <a class="navbar-brand d-flex align-items-center" href="#">
+            <img src="../Image/462575107_2409173296085156_3609403196024518581_n.png" alt="Custom My Ride Logo" style="height: 70px; border-radius: 10px;" class="me-2">
+            <span class="fs-4 fw-bold">CustomMyRide</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <!-- Dropdown Menu for Produkter -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#produkter" id="produkterDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Produkter
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="produkterDropdown">
+                        <li><a class="dropdown-item" href="#ambient-lighting">Ambient Lighting</a></li>
+                        <li><a class="dropdown-item" href="#chrome-delete">Chrome Delete</a></li>
+                        <li><a class="dropdown-item" href="#star-sky">Star Sky</a></li>
+                        <li><a class="dropdown-item" href="#steering-wheel">Steering Wheel</a></li>
+                        <li><a class="dropdown-item" href="#blackout">Blackout</a></li>
+                        <li><a class="dropdown-item" href="#kits">Kits</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item"><a class="nav-link" href="#om-os">Om os</a></li>
+                <li class="nav-item"><a class="nav-link" href="#kontakt">Kontakt</a></li>
+                <li class="nav-item">
+                    <a class="nav-link d-flex align-items-center" id="cart-icon" href="#">
+                        <i class="fa-solid fa-cart-shopping me-2" style="font-size: 24px;"></i>
+                        <span class="badge bg-danger" id="cart-count">0</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+<!-- Hero Section -->
+<header class="hero text-center text-white position-relative" style="background-image: url('../Image/download.jpg'); background-size: cover; background-position: center; background-attachment: fixed;">
+    <!-- Overlay -->
+    <div class="overlay position-absolute top-0 start-0 w-100 h-100" style="background: rgba(0, 0, 0, 0.5);"></div>
+
+    <!-- Content -->
+    <div class="container position-relative">
+        <h1 class="display-4 fw-bold mb-4">Your ride, our passion</h1>
+        <p class="lead mb-4">Discover premium customization options for your vehicle</p>
+        <a href="#produkter" class="btn btn-primary btn-lg">Explore Our Products</a>
+    </div>
+</header>
+
+
+<!-- Products Section -->
+<section id="produkter" class="py-5">
+    <div class="container">
+        <h2 class="text-center mb-5">Our Featured Products</h2>
+        <div class="row g-4" id="product-list">
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="path/to/ambient-lighting-image.jpg" class="card-img-top" alt="Ambient Lighting">
+                    <div class="card-body">
+                        <h5 class="card-title">Ambient Lighting</h5>
+                        <a href="#ambient-lighting" class="btn btn-primary">View Details</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="path/to/chrome-delete-image.jpg" class="card-img-top" alt="Chrome Delete">
+                    <div class="card-body">
+                        <h5 class="card-title">Chrome Delete</h5>
+                        <a href="#chrome-delete" class="btn btn-primary">View Details</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="path/to/star-sky-image.jpg" class="card-img-top" alt="Star Sky">
+                    <div class="card-body">
+                        <h5 class="card-title">Star Sky</h5>
+                        <a href="#star-sky" class="btn btn-primary">View Details</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="path/to/steering-wheel-image.jpg" class="card-img-top" alt="Steering Wheel">
+                    <div class="card-body">
+                        <h5 class="card-title">Steering Wheel</h5>
+                        <a href="#steering-wheel" class="btn btn-primary">View Details</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="path/to/blackout-image.jpg" class="card-img-top" alt="Blackout">
+                    <div class="card-body">
+                        <h5 class="card-title">Blackout</h5>
+                        <a href="#blackout" class="btn btn-primary">View Details</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="path/to/kits-image.jpg" class="card-img-top" alt="Kits">
+                    <div class="card-body">
+                        <h5 class="card-title">Kits</h5>
+                        <a href="#kits" class="btn btn-primary">View Details</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- About Us Section -->
+<section id="om-os" class="about-section py-5">
+    <div class="container">
+        <h2 class="text-center mb-4">About CustomMyRide</h2>
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <p>At CustomMyRide, we're passionate about helping car enthusiasts transform their vehicles into unique expressions of their personality and style. Our curated selection of high-quality customization products is designed to elevate your driving experience.</p>
+                <p>With years of expertise in the automotive industry, we pride ourselves on offering innovative solutions that combine aesthetics, performance, and durability. Whether you're looking to enhance your car's appearance, boost its performance, or add cutting-edge technology, CustomMyRide has you covered.</p>
+            </div>
+            <div class="col-lg-6">
+                <img src="../Image/462575107_2409173296085156_3609403196024518581_n.png" alt="Our Workshop" class="img-fluid rounded shadow">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section id="kontakt" class="py-5">
+    <div class="container">
+        <h2 class="text-center mb-4">Get In Touch</h2>
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <form>
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="name" placeholder="Your Name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" placeholder="Your Email" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="message" class="form-label">Message</label>
+                        <textarea class="form-control" id="message" rows="4" placeholder="Your Message" required></textarea>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary">Send Message</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- Footer -->
+<footer class="bg-dark text-white text-center py-4">
+    <div class="container">
+        <p class="mb-0">&copy; 2024 CustomMyRide. All rights reserved.</p>
+    </div>
+</footer>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<script src="AvailableProduct.js"></script>
+
+</body>
+</html>
