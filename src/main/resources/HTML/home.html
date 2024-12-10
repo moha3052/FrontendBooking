@@ -80,6 +80,13 @@
             outline: none;
             box-shadow: 0 0 5px var(--primary-color);
         }
+        /* Tilføj disse regler til at styre størrelsen på billederne */
+        .product-card img {
+            width: 100%; /* Gør billedet responsivt */
+            height: 250px; /* Sæt en fast højde */
+            object-fit: cover; /* Sørger for, at billedet fylder området uden at deformere det */
+        }
+
     </style>
 
 </head>
@@ -129,7 +136,7 @@
     <div class="container position-relative">
         <h1 class="display-4 fw-bold mb-4">Your ride, our passion.</h1>
         <p class="lead mb-4">Premium kvalitetsprodukter til din bil.</p>
-        <a href="http://localhost:63342/FrontendBooking/src/main/resources/HTML/AllService.html?_ijt=e2u8u2a1kbioohfltkp50hp6el&_ij_reload=RELOAD_ON_SAVE" class="btn btn-primary btn-lg">Udforsk vores produkter</a>
+        <a href="http://localhost:63342/FrontendBooking/src/main/resources/HTML/AllService.html?_ijt=e2u8u2a1kbioohfltkp50hp6el&_ij_reload=RELOAD_ON_SAVE" class="btn btn-primary btn-lg">Udforsk alle vores produkter</a>
     </div>
 </header>
 
@@ -138,11 +145,12 @@
 <section id="produkter" class="py-5">
     <div class="container">
         <h2 class="text-center mb-5">Populære produkter</h2>
-        <div class="row g-4" id="product-list">
+
+        <div class="row g-4" >
             <!-- Ambient Lighting -->
             <div class="col-md-4">
                 <div class="card product-card">
-                    <img src="path/to/ambient-lighting-image.jpg" class="card-img-top" alt="Ambient Lighting">
+                    <img src="../Image/462640527_2362284144142895_2645418599048185566_n.jpg"/>
                     <div class="card-body">
                         <h5 class="card-title">Ambient Lighting</h5>
                         <p class="card-text">Tilføj et unikt og stemningsfyldt lysdesign til din bils interiør for en luksuriøs køreoplevelse.</p>
@@ -150,21 +158,24 @@
                     </div>
                 </div>
             </div>
-            <!-- Chrome Delete -->
+
+            <!-- Interior -->
             <div class="col-md-4">
                 <div class="card product-card">
-                    <img src="path/to/chrome-delete-image.jpg" class="card-img-top" alt="Chrome Delete">
+                    <img src="../Image/Interior-Design-car-design-12-1024x683.jpg"/>
                     <div class="card-body">
-                        <h5 class="card-title">Blackout</h5>
-                        <p class="card-text">Få et moderne og sporty look med mat eller glansfuld folie, der erstatter bilens chrome-detaljer.</p>
-                        <a href="Kategori.html?category=BLACKOUT" class="btn btn-primary">Se detaljer</a>
+                        <h5 class="card-title">Interior</h5>
+                        <p class="card-text">Transformér din bils interiør med stilfulde og personlige detaljer, der skaber en unik og luksuriøs atmosfære.</p>
+                        <a href="Kategori.html?category=INTERIOR" class="btn btn-primary">Se detaljer</a>
                     </div>
                 </div>
             </div>
-            <!-- Star Sky -->
+
+
+            <!-- Stjernehimmel -->
             <div class="col-md-4">
                 <div class="card product-card">
-                    <img src="path/to/star-sky-image.jpg" class="card-img-top" alt="Star Sky">
+                    <img src="../Image/467478332_883056156986462_5494984358126025889_n.jpg"/>
                     <div class="card-body">
                         <h5 class="card-title">Stjernehimmel</h5>
                         <p class="card-text">Transformér din bils loft med en fantastisk stjernehimmel og vælg mellem 500 til 1300 stjerner.</p>
@@ -172,6 +183,7 @@
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 </section>
