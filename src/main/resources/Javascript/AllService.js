@@ -26,14 +26,16 @@ function displayProducts(products) {
         productCard.innerHTML = `
             <div class="card">
                 <div class="card-body">
-               <img src="${product.imageURL}" alt="${product.name}" />
+                    <img src="${product.imageURL}" alt="${product.name}" />
                     <h5 class="card-title">${product.name}</h5>
                     <p class="card-text">${product.description}</p>
                     <p class="card-title">${product.category}</p>
-                    <button class="btn btn-primary add-to-cart" data-service-id="${product.id}">Add to Cart</button>
+                    <button class="btn btn-primary add-to-cart" id="${product.productId}">Add to Cart</button>
                 </div>
-            </div>        
+            </div>
         `;
+
+        console.log(product)
         productList.appendChild(productCard);
     });
 
@@ -41,7 +43,8 @@ function displayProducts(products) {
     const addToCartButtons = document.querySelectorAll('.add-to-cart');
     addToCartButtons.forEach(button => {
         button.addEventListener('click', function() {
-            const serviceId = this.getAttribute('data-service-id');
+            const serviceId = this.id; // Henter id direkte fra knappen
+            console.log(serviceId)
             addToCart(serviceId);
         });
     });
@@ -49,6 +52,7 @@ function displayProducts(products) {
 
 // Funktion til at håndtere tilføjelse til kurv
 function addToCart(serviceId) {
+    localStorage.setItem("itm", serviceId)
     cartCount++; // Øger antallet af varer i kurven
     updateCartCount(); // Opdaterer visningen af antallet i kurven
     console.log(`Service with ID ${serviceId} has been added to the cart. Total items in cart: ${cartCount}`);
