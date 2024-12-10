@@ -8,34 +8,80 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary-color: #3498db;
-            --secondary-color: #343a40;
-        rgb(52, 58, 64)
+            --primary-color: #3498db; /* Knapper */
+            --secondary-color: #1d1d1d; /* Navbar og sektion baggrunde */
+            --text-color: #f5f5f5; /* Lys tekstfarve */
         }
+
         body {
             font-family: 'Arial', sans-serif;
+            background-color: #121212; /* Generel baggrund */
+            color: var(--text-color);
         }
+
         .navbar {
             background-color: var(--secondary-color);
         }
+
         .hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/placeholder.svg?height=600&width=1200');
             background-size: cover;
             background-position: center;
             color: white;
             padding: 100px 0;
+            position: relative;
         }
+
+        .hero .overlay {
+            background: rgba(0, 0, 0, 0.7);
+        }
+
+        .about-section,
+        #kontakt {
+            background-color: var(--secondary-color);
+            padding: 50px 20px;
+            border-radius: 8px;
+        }
+
         .product-card {
-            transition: transform 0.3s ease;
-            height: 100%;
+            background-color: #1f1f1f; /* Mørkere baggrund for kort */
+            border: none;
+            border-radius: 10px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
         }
+
         .product-card:hover {
             transform: translateY(-5px);
+            box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.7);
         }
-        .about-section {
-            background-color: #f8f9fa;
+
+        footer {
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background-color: #2574a9; /* En lidt mørkere blå til hover */
+        }
+
+        input, textarea {
+            background-color: #1f1f1f;
+            color: var(--text-color);
+            border: 1px solid #444;
+        }
+
+        input:focus, textarea:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            box-shadow: 0 0 5px var(--primary-color);
         }
     </style>
+
 </head>
 <body>
 
@@ -159,24 +205,14 @@
     <div class="container">
         <h2 class="text-center mb-4">Kontakt CustomMyRide</h2>
         <div class="row justify-content-center">
-            <div class="col-md-8">
-                <form>
-                    <div class="mb-3">
-                        <label for="Navn" class="form-label">Navn</label>
-                        <input type="text" class="form-control" id="navn" placeholder="Indtast Navn" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="email" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="email" placeholder="Indtast Email" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="besked" class="form-label">Besked</label>
-                        <textarea class="form-control" id="besked" rows="4" placeholder="Indtast Besked" required></textarea>
-                    </div>
-                    <div class="text-center">
-                        <button type="submit" class="btn btn-primary">Send Besked</button>
-                    </div>
-                </form>
+            <div class="col-md-8 text-center">
+                <p class="fs-5">Har du spørgsmål eller brug for hjælp? Du er altid velkommen til at kontakte os.</p>
+                <div class="my-4">
+                    <p><i class="fa-solid fa-phone me-2"></i><strong>Telefon:</strong> +45 12 34 56 78</p>
+                    <p><i class="fa-solid fa-envelope me-2"></i><strong>Email:</strong> <a href="mailto:info@custommyride.dk">info@custommyride.dk</a></p>
+                    <p><i class="fa-solid fa-location-dot me-2"></i><strong>Adresse:</strong> Vesterbro 12, 1620 København V</p>
+                </div>
+                <p class="fs-5">Vi ser frem til at hjælpe dig med at skabe din drømmebil!</p>
             </div>
         </div>
     </div>
