@@ -1,51 +1,88 @@
-// Funktion til at hente produkter baseret på kategori
-function fetchProductsByCategory(category) {
-    const api = "http://localhost:8080/api/product/Category";
-    const url = category ? `${api}?category=${category}` : api; // Tilføj kategori til URL
+const api = "http://localhost:8080/api/product/Category"; // URL til API'et
+let cartCount = 0;
 
-    fetch(url)
-        .then(response => response.json())
-        .then(products => {
-            displayProducts(products, category); // Send også kategorien til display-funktionen
-        })
-        .catch(error => {
-            console.error('Error fetching products:', error);
-        });
+// Henter kategori fra URL'en
+function getQueryParam(param) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(param); // Forventer ?category=noget
 }
 
-// Funktion til at vise produkter
-function displayProducts(products, category) {
+// Opdaterer sideindholdet baseret på kategori
+async function updateCategoryPage() {
+    const category = getQueryParam('category');
     const productList = document.getElementById("product-list");
-    productList.innerHTML = ""; // Rydder eksisterende indhold
-
-    // Opdater kategorioverskriften
     const categoryTitle = document.getElementById("category-title");
-    categoryTitle.textContent = category.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase()); // Formaterer kategorinavnet
+
+    // Ingen kategori valgt
+    if (!category) {
+        categoryTitle.textContent = "Ingen kategori valgt";
+        productList.innerHTML = `<p class="text-center">Vælg venligst en kategori.</p>`;
+        return;
+    }
+
+    // Opdater titel og overskrift
+    document.title = `CustomMyRide - ${category}`;
+    categoryTitle.textContent = `Kategori: ${category.replace(/_/g, ' ')}`;
+
+    try {
+        // Hent produkter fra API
+        const response = await fetch(`${api}?category=${category}`);
+        if (!response.ok) {
+            throw new Error("Fejl ved hentning af produkter");
+        }
+        const products = await response.json();
+
+        // Vis produkter
+        displayProducts(products);
+    } catch (error) {
+        console.error(error);
+        productList.innerHTML = `<p class="text-danger">Kunne ikke hente produkter for denne kategori.</p>`;
+    }
+}
+
+// Viser produkterne i en liste
+function displayProducts(products) {
+    const productList = document.getElementById("product-list");
+    productList.innerHTML = "";
+
+    if (products.length === 0) {
+        productList.innerHTML = "<p class='text-center'>Ingen produkter fundet i denne kategori.</p>";
+        return;
+    }
 
     products.forEach(product => {
         const productCard = document.createElement('div');
-        productCard.className = "col-md-4"; // Bootstrap kolonne
+        productCard.className = "col-md-4"; // Bootstrap layout
         productCard.innerHTML = `
             <div class="card">
-                <img src="${product.imageURL}" class="card-img-top" alt="${product.name}" />
+                <img src="${product.imageURL}" class="card-img-top" alt="${product.name}">
                 <div class="card-body">
                     <h5 class="card-title">${product.name}</h5>
                     <p class="card-text">${product.description}</p>
                     <p class="card-text"><strong>Kategori:</strong> ${product.category}</p>
-                    <button class="btn btn-primary add-to-cart" data-service-id="${product.id}">Add to Cart</button>
+                    <button class="btn btn-primary add-to-cart" data-id="${product.id}">Tilføj til kurv</button>
                 </div>
             </div>
         `;
         productList.appendChild(productCard);
     });
+
+    // Tilføj event listeners til knapperne
+    const addToCartButtons = document.querySelectorAll('.add-to-cart');
+    addToCartButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const productId = button.getAttribute('data-id');
+            addToCart(productId);
+        });
+    });
 }
 
-// Lyt til klik på dropdown-menuen
-const categoryLinks = document.querySelectorAll('.dropdown-item');
-categoryLinks.forEach(link => {
-    link.addEventListener('click', (event) => {
-        event.preventDefault(); // Forhindre standard link handling
-        const category = link.getAttribute('data-category'); // Hent kategori fra data-attribut
-        fetchProductsByCategory(category); // Hent produkter baseret på kategori
-    });
-});
+// Tilføjer et produkt til kurven
+function addToCart(productId) {
+    cartCount++;
+    document.getElementById("cart-count").textContent = cartCount;
+    console.log(`Produkt med ID ${productId} tilføjet til kurv.`);
+}
+
+// Initialiser siden
+document.addEventListener('DOMContentLoaded', updateCategoryPage);

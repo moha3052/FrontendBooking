@@ -64,3 +64,5 @@ function updateCartCount() {
 document.addEventListener('DOMContentLoaded', async function() {
     await fetchProducts();
 });
+
+
