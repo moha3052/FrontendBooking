@@ -12,6 +12,7 @@
     :root {
         --primary-color: #3498db;
         --secondary-color: #343a40;
+    rgb(52, 58, 64)
     }
     body {
         font-family: 'Arial', sans-serif;
@@ -19,10 +20,27 @@
     .navbar {
         background-color: var(--secondary-color);
     }
+    .hero {
+        background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/placeholder.svg?height=600&width=1200');
+        background-size: cover;
+        background-position: center;
+        color: white;
+        padding: 100px 0;
+    }
+    .product-card {
+        transition: transform 0.3s ease;
+        height: 100%;
+    }
+    .product-card:hover {
+        transform: translateY(-5px);
+    }
+    .about-section {
+        background-color: #f8f9fa;
+    }
 </style>
 <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
     <div class="container">
-        <a class="navbar-brand d-flex align-items-center" href="#">
+        <a class="navbar-brand d-flex align-items-center" href="http://localhost:63342/FrontendBooking/src/main/resources/HTML/home.html?_ijt=g9nqmc8f71le0iqca99bpj60u2&_ij_reload=RELOAD_ON_SAVE">
             <img src="../Image/462575107_2409173296085156_3609403196024518581_n.png" alt="Custom My Ride Logo" style="height: 70px; border-radius: 10px;" class="me-2">
             <span class="fs-4 fw-bold">CustomMyRide</span>
         </a>
@@ -54,6 +72,12 @@
         <!-- Dynamiske produkter indsat her -->
     </div>
 </div>
+
+<footer class="text-center py-4">
+    <div class="container">
+        <p class="mb-0">&copy; 2024 CustomMyRide. All rights reserved.</p>
+    </div>
+</footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="../Javascript/kategori.js"></script>
