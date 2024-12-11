@@ -30,7 +30,9 @@ function displayProducts(products) {
                     <h5 class="card-title">${product.name}</h5>
                     <p class="card-text">${product.description}</p>
                     <p class="card-title">${product.category}</p>
+
                     <button class="btn btn-primary add-to-cart" id="${product.productId}">Add to Cart</button>
+
                 </div>
             </div>
         `;
