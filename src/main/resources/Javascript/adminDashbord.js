@@ -2,6 +2,8 @@ const api = "http://localhost:8080/api/product";
 let cartCount = 0; // Variabel til at holde styr på antal varer i kurven
 
 
+//locala storage til genere dymiask
+
 // Funktion til at slette produkt
 async function deleteProduct(id) {
     const confirmDelete = confirm("Er du sikker på, at du vil slette dette produkt?");
