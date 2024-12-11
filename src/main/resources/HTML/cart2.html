@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Management</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Styling til slet-knap */
+        .delete-btn {
+            background-color: #dc3545; /* Rød farve */
+            color: white;
+            border: none;
+            padding: 5px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .delete-btn:hover {
+            background-color: #c82333; /* Mørkere rød */
+        }
+
+        /* Tabel-justering */
+        .order-table th, .order-table td {
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        /* Tilføj-knap styling */
+        .btn-submit {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Kurv</h1>
+
+    <!-- Order Table -->
+    <table class="table table-striped table-bordered order-table">
+        <thead>
+        <tr>
+            <th>Service</th>
+            <th>Mængde</th>
+            <th>Handlinger</th>
+        </tr>
+        </thead>
+        <tbody id="orderTableBody">
+        <!-- Dynamiske rækker tilføjes her -->
+        </tbody>
+    </table>
+
+    <!-- Add New Product Form -->
+    <div class="mt-4">
+        <h4>Tilføj ny ordre</h4>
+        <form id="addProductForm" class="row g-3">
+            <div class="col-md-6">
+                <label for="serviceName" class="form-label">Service</label>
+                <input type="text" id="serviceName" class="form-control" placeholder="Indtast service" required>
+            </div>
+            <div class="col-md-4">
+                <label for="quantity" class="form-label">Mængde</label>
+                <input type="number" id="quantity" class="form-control" placeholder="Indtast mængde" required>
+            </div>
+            <div class="col-md-2 d-flex align-items-end">
+                <button type="submit" class="btn btn-primary btn-submit">Tilføj</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Proceed to Order -->
+    <div class="mt-4 text-end">
+        <button id="proceedToOrder" class="btn btn-success">Gå videre til ordre</button>
+    </div>
+</div>
+
+<script src="script.js"></script> <!-- Link til ekstern JavaScript-fil -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
