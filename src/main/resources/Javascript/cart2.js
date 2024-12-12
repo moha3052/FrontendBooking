@@ -1,94 +1,113 @@
-document.addEventListener('DOMContentLoaded', function () {
-    const apiUrl = 'http://localhost:8080/api/orderlines'; // Din backend API URL
-
-    const orderTableBody = document.getElementById('orderTableBody');
-    const addProductForm = document.getElementById('addProductForm');
-
-    let orderId = 1; // Unik ID til hver ordrelinje
-
-    // Hent alle orderlines og vis dem
-    async function fetchOrderlines() {
-        try {
-            const response = await fetch(apiUrl);
-            if (!response.ok) {
-                throw new Error('Error fetching orderlines');
-            }
-            const orderlines = await response.json();
-            orderTableBody.innerHTML = ''; // Ryd tabellen
-
-            orderlines.forEach((orderline, index) => {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${index + 1}</td>
-                    <td>${orderline.product.name}</td>
-                    <td id="quantity-${orderline.orderLineId}">${orderline.quantity}</td>
-                    <td>
-                        <button class="delete-btn" onclick="deleteOrderline(${orderline.orderLineId})">Slet</button>
-                    </td>
-                `;
-                orderTableBody.appendChild(row);
-            });
-        } catch (error) {
-            console.error(error);
-            alert('Failed to fetch orderlines');
-        }
-    }
-
-    // Tilføj en ny ordrelinje
-    addProductForm.addEventListener('submit', function (e) {
-        e.preventDefault(); // Undgå side-genindlæsning
-
-        const serviceName = document.getElementById('serviceName').value.trim();
-        const quantity = document.getElementById('quantity').value.trim();
-
-        if (serviceName && quantity > 0) {
-            // Opret ny række
-            const row = document.createElement('tr');
-
-            row.innerHTML = `
-                <td>${orderId++}</td>
-                <td>${serviceName}</td>
-                <td>${quantity}</td>
-                <td>
-                    <button class="delete-btn">Slet</button>
-                </td>
-            `;
-
-            // Tilføj rækken til tabellen
-            orderTableBody.appendChild(row);
-
-            // Ryd formularfelter
-            addProductForm.reset();
-
-            // Tilføj slet-funktionalitet
-            row.querySelector('.delete-btn').addEventListener('click', function () {
-                row.remove(); // Fjern rækken fra tabellen
-            });
-        } else {
-            alert('Udfyld alle felter korrekt.');
-        }
-    });
-
-    // Slet en orderline
-    async function deleteOrderline(orderLineId) {
-        if (confirm("Are you sure you want to delete this order?")) {
-            try {
-                const response = await fetch(`${apiUrl}/${orderLineId}`, {
-                    method: 'DELETE',
-                });
-
-                if (!response.ok) {
-                    throw new Error('Error deleting orderline');
-                }
-
-                fetchOrderlines(); // Opdater tabellen
-            } catch (error) {
-                console.error(error);
-                alert('Failed to delete orderline');
-            }
-        }
-    }
-
-    // Hent ordrelinjer ved sideindlæsning
-    fetchOrderlines();
-});
+// // API URL til produkter
+// const apiUrl = "http://localhost:8080/api/product";
+//
+// // Hent kurven fra localStorage
+// let cart = JSON.parse(localStorage.getItem("cart")) || [];
+//
+// // Tilføj service til kurv
+// function addToCart(serviceId) {
+//     // Find produktet ved serviceId
+//     fetch(apiUrl)
+//         .then(response => response.json())
+//         .then(products => {
+//             const product = products.find(p => p.productId == serviceId);
+//             if (product) {
+//                 const existingProduct = cart.find(item => item.product.productId === serviceId);
+//                 if (existingProduct) {
+//                     existingProduct.quantity++; // Øg mængden, hvis produktet allerede er i kurven
+//                 } else {
+//                     cart.push({ product, quantity: 1 }); // Tilføj nyt produkt med mængde 1
+//                 }
+//
+//                 // Gem kurven i localStorage
+//                 localStorage.setItem("cart", JSON.stringify(cart));
+//
+//                 // Opdater kurven på siden
+//                 displayCart();
+//             }
+//         })
+//         .catch(error => console.error("Fejl ved tilføjelse af produkt til kurv:", error));
+// }
+//
+// // Vis kurvens indhold
+// function displayCart() {
+//     const cartBody = document.getElementById("cart-body");
+//     cartBody.innerHTML = ''; // Ryd tabelrækkerne
+//
+//     cart.forEach(item => {
+//         const row = document.createElement("tr");
+//
+//         row.innerHTML = `
+//             <td>
+//                 <img src="${item.product.imageURL}" alt="${item.product.name}" width="50" />
+//                 ${item.product.name}
+//             </td>
+//             <td>
+//                 <input type="number" value="${item.quantity}" min="1" class="quantity-input" data-id="${item.product.productId}">
+//             </td>
+//             <td>${item.product.price * item.quantity} DKK</td>
+//             <td>
+//                 <button class="remove-from-cart" data-id="${item.product.productId}">Fjern</button>
+//             </td>
+//         `;
+//
+//         cartBody.appendChild(row);
+//     });
+//
+//     // Opdater knapperne og mængden
+//     const removeButtons = document.querySelectorAll('.remove-from-cart');
+//     removeButtons.forEach(button => {
+//         button.addEventListener('click', removeFromCart);
+//     });
+//
+//     const quantityInputs = document.querySelectorAll('.quantity-input');
+//     quantityInputs.forEach(input => {
+//         input.addEventListener('input', updateQuantity);
+//     });
+// }
+//
+// // Fjern service fra kurv
+// function removeFromCart(event) {
+//     const productId = event.target.getAttribute("data-id");
+//     cart = cart.filter(item => item.product.productId != productId);
+//
+//     // Gem den opdaterede kurv i localStorage
+//     localStorage.setItem("cart", JSON.stringify(cart));
+//
+//     // Opdater kurven på siden
+//     displayCart();
+// }
+//
+// // Opdater mængde af service
+// function updateQuantity(event) {
+//     const productId = event.target.getAttribute("data-id");
+//     const newQuantity = parseInt(event.target.value);
+//
+//     if (newQuantity < 1) {
+//         event.target.value = 1;
+//         return;
+//     }
+//
+//     const productInCart = cart.find(item => item.product.productId == productId);
+//     if (productInCart) {
+//         productInCart.quantity = newQuantity;
+//
+//         // Gem den opdaterede kurv i localStorage
+//         localStorage.setItem("cart", JSON.stringify(cart));
+//
+//         // Opdater kurven på siden
+//         displayCart();
+//     }
+// }
+//
+// // Gå videre til bestilling
+// document.getElementById("go-to-order").addEventListener("click", function() {
+//     // Send kurv til bestilling
+//     localStorage.setItem("order", JSON.stringify(cart));
+//     window.location.href = "order.html"; // Gå til bestillingsside
+// });
+//
+// // Når DOM'en er klar, vis kurven
+// document.addEventListener("DOMContentLoaded", function() {
+//     displayCart();
+// });
