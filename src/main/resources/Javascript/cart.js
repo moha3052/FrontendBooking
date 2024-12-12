@@ -36,9 +36,12 @@ function displayProducts(products) {
                     <p class="card-text">${product.description || "Ingen beskrivelse"}</p>
                     <p><strong>Kategori:</strong> ${product.category}</p>
                     <button class="btn btn-primary add-to-cart" data-id="${product.id}">Tilføj til kurv</button>
+                    
                 </div>
             </div>
         `;
+
+        console.log(product.id)
 
         productList.appendChild(productCard);
     });
