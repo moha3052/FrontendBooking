@@ -1,4 +1,5 @@
 const api = "http://localhost:8080/api/product/Category"; // URL til API'et
+const orderlinesApi = "http://localhost:8080/api/orderlines"; // URL til ordrelinjer API'et
 let cartCount = 0;
 
 // Henter kategori fra URL'en
@@ -71,8 +72,8 @@ function displayProducts(products) {
     });
 }
 
-// Tilføjer et produkt til kurven
-function addToCart(productId) {
+// Tilføjer et produkt til kurven og gemmer i MySQL
+async function addToCart(productId) {
     // Hent eksisterende kurv fra localStorage
     const cart = JSON.parse(localStorage.getItem('cart')) || [];
 
@@ -82,7 +83,29 @@ function addToCart(productId) {
         localStorage.setItem('cart', JSON.stringify(cart)); // Gem opdateret kurv i localStorage
         cartCount++;
         document.getElementById("cart-count").textContent = cartCount;
+
         console.log(`Produkt med ID ${productId} tilføjet til kurv.`);
+
+        // Send produkt til backend for at gemme i MySQL
+        const orderlineData = { productId: productId }; // Tilpas denne struktur som nødvendigt
+        try {
+            const response = await fetch(orderlinesApi, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(orderlineData),
+            });
+
+            if (!response.ok) {
+                throw new Error('Fejl ved gemning af ordrelinje i databasen');
+            }
+
+            console.log(`Ordrelinje gemt i databasen for produkt ID ${productId}.`);
+        } catch (error) {
+            console.error(error);
+            alert('Der opstod en fejl under gemning af produktet.');
+        }
     } else {
         console.log(`Produkt med ID ${productId} er allerede i kurven.`);
     }
