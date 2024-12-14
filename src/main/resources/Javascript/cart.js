@@ -76,10 +76,15 @@ function addToCart(product) {
 }
 
 // Opdaterer kurvtælleren
+// Opdaterer kurvtælleren
 function updateCartCount() {
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
-    document.getElementById("cart-count").textContent = cart.length;
+    const countElement = document.getElementById("cart-count");
+
+    // Opdater tælleren baseret på kurvens længde
+    countElement.textContent = cart.length > 0 ? cart.length : "0";
 }
+
 
 // Viser kurvens indhold
 function displayCartItems() {
@@ -129,9 +134,38 @@ function removeFromCart(productId) {
     updateCartCount();
 }
 
+// Tøm kurven og opdaterer MySQL
+async function clearCart() {
+    localStorage.removeItem("cart");
+    displayCartItems();
+    updateCartCount();
+
+    try {
+        const response = await fetch(`${api}/clear`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+
+        if (!response.ok) {
+            throw new Error('Fejl ved tømning af kurven i databasen');
+        }
+
+        alert('Kurven er blevet tømt!');
+        console.log('Kurven er tømt i databasen.');
+    } catch (error) {
+        console.error(error);
+        alert('Der opstod en fejl under tømning af kurven på backend.');
+    }
+}
+
 // Initialiser kurv
 document.addEventListener("DOMContentLoaded", () => {
     fetchProducts();
     displayCartItems();
     updateCartCount();
 });
+
+// Tilføj en knap i HTML for at rydde kurven
+// <button class="btn btn-warning" onclick="clearCart()">Tøm kurv</button>

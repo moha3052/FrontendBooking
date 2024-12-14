@@ -87,9 +87,49 @@
             object-fit: cover; /* Sørger for, at billedet fylder området uden at deformere det */
         }
 
+        .login-dialog {
+            border: none;
+            border-radius: 10px;
+            padding: 20px;
+            background-color: #f8f9fa; /* Lys baggrundsfarve */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Skygge for dybde */
+        }
+
+        .login-dialog h3 {
+            margin-bottom: 20px; /* Plads mellem overskrift og indhold */
+            color: #333; /* Mørkere farve for teksten */
+        }
+
+        .login-dialog .form-label {
+            font-weight: bold; /* Fed skrift for labels */
+        }
+
+        .login-dialog .form-control {
+            border-radius: 5px; /* Rundede kanter på input-felter */
+            border: 1px solid #ced4da; /* Lys grå kant */
+        }
+
+        .login-dialog .btn {
+            padding: 10px 20px; /* Mere polstring i knapperne */
+            border-radius: 5px; /* Rundede kanter på knapperne */
+        }
+
+        .login-dialog .btn-secondary {
+            background-color: #6c757d; /* Sekundær farve */
+            color: #fff; /* Hvid tekstfarve */
+        }
+
+        .login-dialog .btn-primary {
+            background-color: #007bff; /* Primær farve */
+            color: #fff; /* Hvid tekstfarve */
+        }
+
+
     </style>
+
     <script src="../Javascript/fetchingFunction.js"></script>
     <script src="../Javascript/kategori.js"></script>
+    <script src="../Javascript/Login.js"></script>
 
 
 </head>
@@ -98,7 +138,7 @@
 <!-- Navigation Bar -->
 <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
     <div class="container">
-        <a class="navbar-brand d-flex align-items-center" href="http://localhost:63342/FrontendBooking/src/main/resources/HTML/home.html?_ijt=e2u8u2a1kbioohfltkp50hp6el&_ij_reload=RELOAD_ON_SAVE">
+        <a class="navbar-brand d-flex align-items-center" href="home.html">
             <img src="../Image/462575107_2409173296085156_3609403196024518581_n.png" alt="Custom My Ride Logo" style="height: 70px; border-radius: 10px;" class="me-2">
             <span class="fs-4 fw-bold">CustomMyRide</span>
         </a>
@@ -107,7 +147,6 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
-                <!-- Menupunkter uden dropdown -->
                 <li class="nav-item"><a class="nav-link" href="Kategori.html?category=AMBIENT_BELYSNING">Ambient Lighting</a></li>
                 <li class="nav-item"><a class="nav-link" href="Kategori.html?category=STJERNEHIMMEL">Stjernehimmel</a></li>
                 <li class="nav-item"><a class="nav-link" href="Kategori.html?category=BLACKOUT">Blackout</a></li>
@@ -122,10 +161,36 @@
                         <span class="badge bg-danger" id="cart-count">0</span>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="btn btn-outline-light ms-2" onclick="showLogin()" style="text-decoration: none;">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="btn btn-primary ms-2" href="signup.html" style="text-decoration: none;">Sign Up</a>
+                </li>
             </ul>
         </div>
     </div>
 </nav>
+
+<dialog id="loginDialog" class="login-dialog">
+    <form method="dialog">
+        <h3 class="text-center">Login</h3>
+        <div class="mb-3">
+            <label for="email" class="form-label">E-mail</label>
+            <input type="email" id="email" class="form-control" placeholder="Indtast din e-mail" required>
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" id="password" class="form-control" placeholder="Indtast dit password" required>
+        </div>
+        <div class="d-flex justify-content-between">
+            <button type="button" class="btn btn-secondary" onclick="closeLogin()">Annuller</button>
+            <button type="submit" class="btn btn-primary">Login</button>
+        </div>
+    </form>
+</dialog>
+
+
 
 
 

@@ -73,42 +73,55 @@ function displayProducts(products) {
 }
 
 // Tilføjer et produkt til kurven og gemmer i MySQL
-async function addToCart(productId) {
+async function addToCart(productId, quantity = 1) {
     // Hent eksisterende kurv fra localStorage
     const cart = JSON.parse(localStorage.getItem('cart')) || [];
 
     // Tjek om produktet allerede er i kurven
-    if (!cart.includes(productId)) {
-        cart.push(productId);
-        localStorage.setItem('cart', JSON.stringify(cart)); // Gem opdateret kurv i localStorage
-        cartCount++;
-        document.getElementById("cart-count").textContent = cartCount;
-
-        console.log(`Produkt med ID ${productId} tilføjet til kurv.`);
-
-        // Send produkt til backend for at gemme i MySQL
-        const orderlineData = { productId: productId }; // Tilpas denne struktur som nødvendigt
-        try {
-            const response = await fetch(orderlinesApi, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(orderlineData),
-            });
-
-            if (!response.ok) {
-                throw new Error('Fejl ved gemning af ordrelinje i databasen');
-            }
-
-            console.log(`Ordrelinje gemt i databasen for produkt ID ${productId}.`);
-        } catch (error) {
-            console.error(error);
-            alert('Der opstod en fejl under gemning af produktet.');
-        }
+    const existingItem = cart.find(item => item.productId === productId);
+    if (existingItem) {
+        existingItem.quantity += quantity; // Opdater mængden hvis produktet allerede findes
     } else {
-        console.log(`Produkt med ID ${productId} er allerede i kurven.`);
+        cart.push({ productId, quantity }); // Tilføj nyt produkt med mængde
     }
+
+    localStorage.setItem('cart', JSON.stringify(cart)); // Gem opdateret kurv i localStorage
+
+    // Opdater kurvtælleren med det samme
+    updateCartCount();
+
+    // Send produktdata til backend
+    const orderline = {
+        orderLineId: productId, // Produkt-ID
+        quantity: quantity,   // Mængde
+    };
+
+    try {
+        const response = await fetch(orderlinesApi, { // Sørg for at bruge din API-endpoint her
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(orderline), // Send data til backend
+        });
+
+        if (!response.ok) {
+            throw new Error('Fejl ved gemning af ordrelinje i databasen');
+        }
+
+        alert(`Produkt ID ${productId} tilføjet til kurven!`);
+        console.log(`Ordrelinje gemt i databasen for produkt ID ${productId}.`);
+    } catch (error) {
+        console.error(error);
+        alert('Der opstod en fejl under gemning af produktet på backend.');
+    }
+}
+
+// Opdaterer kurvtælleren
+function updateCartCount() {
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    cartCount = cart.reduce((total, item) => total + item.quantity, 0);
+    document.getElementById("cart-count").textContent = cartCount;
 }
 
 // Initialiser siden
