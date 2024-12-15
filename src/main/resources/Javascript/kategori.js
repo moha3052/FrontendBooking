@@ -24,7 +24,7 @@ async function updateCategoryPage() {
     categoryTitle.textContent = `Kategori: ${category.replace(/_/g, ' ')}`;
 
     try {
-        const response = await fetch(`${api}?category=${category}`);
+        const response = await fetch(`${api}?Category=${category}`);
         if (!response.ok) {
             throw new Error("Fejl ved hentning af produkter");
         }
