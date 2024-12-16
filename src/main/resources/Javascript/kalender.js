@@ -2,7 +2,6 @@ const api = "http://localhost:8080/api/v1";
 const bookingForm = document.getElementById("booking-form");
 const bookingDate = document.getElementById("booking-date");
 const bookingTime = document.getElementById("booking-time");
-const confirmation = document.getElementById("confirmation");
 
 // Åbningstider
 const openHours = {
