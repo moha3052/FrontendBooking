@@ -55,33 +55,28 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         try {
-            // Udfør login ved hjælp af FetchesFunc
-            const response = await FetchesFunc.fetchBy(
-                "http://localhost:8080", // Base URL
-                "/api/v1/authCred/login", // Endpoint
-                FetchesFunc.methods.POST, // HTTP-metode
-                null, // Ingen ekstra headers
-                { email: email, password: password }, // Login-data (matcher LoginDto)
-                null, // Ingen token nødvendig til login
-                true // Angiver, at dette er en login-anmodning
+            const response = await FetchesFunc.login(
+                "http://localhost:8080",
+                "/api/v1/authCred/login",
+                { email, password }
             );
 
-            if (response) {
-                console.log('Login lykkedes:', response);
+            if (response && response.data && response.data.accessToken) {
+                console.log('Login successful:', response);
 
-                // Gem token i localStorage
+                FetchesFunc.saveToken(response.data.accessToken); // Save the token
 
-                alert("Login lykkedes!");
-
-                // Luk login-dialogen
+                alert("Login successful!");
                 closeLogin();
+            } else if (response.status === 403) {
+                alert("Access denied: Invalid credentials.");
             } else {
-                console.error('Login mislykkedes:', response);
-                alert('Ugyldig e-mail eller adgangskode.'+JSON.stringify(response));
+                alert("Login failed: " + response.message);
             }
         } catch (error) {
-            console.error('Fejl under login:', error);
-            alert('Der opstod en fejl under login. Prøv venligst igen.');
+            console.error('Error during login:', error);
+            alert('An error occurred. Please try again.');
         }
+
     });
 });

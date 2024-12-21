@@ -34,7 +34,8 @@ export class FetchesFunc {
                     headers.set(key, value);
                 }
             }
-
+            console.log("Token being sent:", FetchesFunc.getTokenFromStorage());
+            console.log("Headers:", headers);
             const options = {
                 method: methodType,
                 headers,
@@ -71,6 +72,7 @@ export class FetchesFunc {
             }
 
             const responseData = await response.json();
+            console.log("Response received:", responseData);
             return responseData;
         } catch (error) {
             console.error(`Fetch failed: ${error.message}`);
@@ -83,14 +85,27 @@ export class FetchesFunc {
 
     static async login(urlPath, path, data) {
         const response = await this.fetchBy(urlPath, path, this.methods.POST, null, data, null, true);
-        if (response.ok) {
-            localStorage.setItem("user", JSON.stringify(response.token));
+
+        if (response && response.data && response.data.accessToken) {
+            this.saveToken(response.data.accessToken); // Save the token
+            console.log("Token saved successfully:", response.data.accessToken);
+        } else {
+            console.error("Failed to login:", response);
         }
+
         return response;
     }
 
+
     static getTokenFromStorage() {
-        return JSON.parse(localStorage.getItem("user"));
+        console.log("This is the user"+localStorage.getItem("user"));
+        const user =localStorage.getItem("user");
+        console.log("This Is The User:" + user)
+        return user;
+
+    }
+    static saveToken(token) {
+        localStorage.setItem("user", token);
     }
 
     static removeToken() {
